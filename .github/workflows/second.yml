@@ -1,0 +1,50 @@
+name: Second workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - stage
+          - uat
+          - prod
+          - mgmt
+      aws_region:
+        description: "AWS Region to connect to"
+        required: true
+        default: 'us-east-1'
+        type: choice
+        options:
+          - 'us-east-1'
+          - 'us-west-2'
+      tenant:
+        description: "AWS Tenant"
+        required: true
+        default: 'Acuity'
+        type: choice
+        options:
+          - 'Acuity'
+          - 'Ohio'
+      user_name:
+        description: "Your name"
+        required: true
+        default: "John Doe"
+        type: string
+
+permissions:
+    id-token: write
+    contents: read
+    pull-requests: write
+
+jobs:
+  print_message:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print second message
+      run: echo "Hello, ${{ github.event.inputs.user_name }}!"
