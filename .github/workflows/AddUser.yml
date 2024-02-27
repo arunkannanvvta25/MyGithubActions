@@ -3,6 +3,10 @@ name: Print Message Workflow
 on:
   workflow_dispatch:
     inputs:
+      myvalue:
+        description:'Value'
+        required:true
+        default:'dev'
       environment:
         description: "Environment to deploy"
         required: true
