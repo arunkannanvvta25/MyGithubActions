@@ -3,10 +3,6 @@ name: Print Message Workflow
 on:
   workflow_dispatch:
     inputs:
-      myvalue:
-        description:'Value'
-        required:true
-        default:'dev'
       environment:
         description: "Environment to deploy"
         required: true
@@ -34,7 +30,12 @@ on:
         options:
           - 'Acuity'
           - 'Ohio'
- 
+      user_name:
+        description: "Your name"
+        required: true
+        default: "John Doe"
+        type: string
+
 permissions:
     id-token: write
     contents: read
@@ -46,4 +47,4 @@ jobs:
 
     steps:
     - name: Print a message
-      run: echo "Hello, world!"
+      run: echo "Hello, ${{ github.event.inputs.user_name }}!"
